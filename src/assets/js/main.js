@@ -20,7 +20,7 @@ import Boot from './states/boot';
 import Preloader from './states/preloader';
 import Game from './states/game';
 
-const game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'canvas-wrapper');
+const game = new Phaser.Game(1334, 750, Phaser.AUTO, 'canvas-wrapper');
 game.state.add('Boot', Boot);
 game.state.add('Preloader', Preloader);
 game.state.add('Game', Game);
