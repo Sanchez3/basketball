@@ -18,7 +18,7 @@ class Preloader extends Phaser.State {
 
     update() {
         if (this.ready) {
-        this.game.state.start('Game');
+            this.game.state.start('Game');
         }
     }
 
@@ -28,6 +28,7 @@ class Preloader extends Phaser.State {
         this.load.image('basketball_stand', 'assets/img/basketball_stand.png');
         this.load.image('ball', 'assets/img/ball.png');
         this.load.image('bg', 'assets/img/bg.jpg');
+        this.load.spritesheet('chain', 'assets/img/chain.png', 16, 26);
     }
 
     onLoadComplete() {
