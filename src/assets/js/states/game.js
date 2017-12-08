@@ -63,7 +63,7 @@ class Game extends Phaser.State {
 
         var netgroup = this.add.group();
         // net
-         this.createNet(40, 400, 64);
+         // this.createNet(40, 400, 64);
 
         this.input.onDown.add(this.launch, this);
 
