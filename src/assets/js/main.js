@@ -10,8 +10,9 @@
 
 // import CSS
 // import animate_css from 'animate.css/animate.min.css';
-import css from '../css/css.css';
-import scss from '../css/sass.scss';
+window.PIXI = require('phaser-ce/build/custom/pixi');
+window.p2 = require('phaser-ce/build/custom/p2');
+window.Phaser = require('phaser-ce/build/custom/phaser-split');
 
 
 // import Js Plugins/Entities
@@ -20,7 +21,7 @@ import Boot from './states/boot';
 import Preloader from './states/preloader';
 import Game from './states/game';
 
-const game = new Phaser.Game(1334, 750, Phaser.AUTO, 'canvas-wrapper');
+const game = new Phaser.Game({ width: 1334, height: 750, renderer: Phaser.CANVAS, preserveDrawingBuffer: true, parent: 'canvas-wrapper' });
 game.state.add('Boot', Boot);
 game.state.add('Preloader', Preloader);
 game.state.add('Game', Game);

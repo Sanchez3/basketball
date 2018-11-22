@@ -8,12 +8,7 @@ class Game extends Phaser.State {
         this.world.setBounds(0, 0, 1334, 670);
         this.physics.startSystem(Phaser.Physics.P2JS);
         this.physics.p2.defaultRestitution = 0.8;
-        const text = this.add.text(this.game.width * 0.5, 0, 'Game', {
-            font: '42px Arial',
-            fill: '#ffffff',
-            align: 'center'
-        });
-        text.anchor.set(0.5, 0);
+
 
         this.add.image(this.game.width * 0.5, this.game.height * 0.5, 'bg').anchor.set(0.5);
         var stand = this.add.sprite(this.game.width * 0.5 + 325, 10, 'basketball_stand');
@@ -43,7 +38,7 @@ class Game extends Phaser.State {
         this.physics.p2.restitution = 0.8;
         this.camera.follow(this.ball);
         //Static Body
-        var board = this.add.graphics(1147, 100);
+        var board = this.add.graphics(1130, 100);
         board.beginFill(0xffffff);
         board.drawRect(0, 0, 50, 136);
         board.endFill();
@@ -63,9 +58,21 @@ class Game extends Phaser.State {
 
         var netgroup = this.add.group();
         // net
-         // this.createNet(40, 400, 64);
+        // this.createNet(40, 400, 64);
 
         this.input.onDown.add(this.launch, this);
+
+        const text = this.add.text(this.game.width * 0.5, 0, 'click to the left / right of the ball', {
+            font: '42px Arial',
+            fill: '#ffffff',
+            align: 'center'
+        });
+        text.anchor.set(0.5, 0);
+
+        this.bmd = this.add.bitmapData(1334, 670);
+        this.bmd.context.fillStyle = '#ffffff';
+    
+        this.bg = this.add.sprite(0, 0, this.bmd);
 
 
         // this.input.onDown.add(this.endGame, this);
@@ -114,15 +121,19 @@ class Game extends Phaser.State {
     }
 
     update() {
+        this.bmd.context.fillStyle = '#ffff00';
+        this.bmd.context.fillRect(this.ball.x, this.ball.y, 2, 2);
+        //When renderer:WEBGL
+        // this.bmd.dirty = true;
 
     }
 
     launch() {
         if (this.input.x < this.ball.x) {
-            this.ball.body.velocity.x = -300;
+            this.ball.body.velocity.x = -200;
             this.ball.body.velocity.y = -200;
         } else {
-            this.ball.body.velocity.x = 300;
+            this.ball.body.velocity.x = 200;
             this.ball.body.velocity.y = -200;
         }
     }
