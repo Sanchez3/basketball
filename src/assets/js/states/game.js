@@ -26,7 +26,7 @@ class Game extends Phaser.State {
         basket.endFill();
 
 
-        this.ball = this.add.sprite(100, 100, 'ball');
+        this.ball = this.add.sprite(400, 100, 'ball');
         this.ball.smoothed = false;
         this.ball.anchor.setTo(0.5);
         this.physics.p2.enable(this.ball, true);
@@ -34,9 +34,13 @@ class Game extends Phaser.State {
         this.ball.body.setCircle(28);
         // this.ball.body.fixedRotation = false;
         this.ball.body.velocity.y = 200;
+
         this.physics.p2.gravity.y = 100;
         this.physics.p2.restitution = 0.8;
         this.camera.follow(this.ball);
+        this.ball.body.mass=10;
+        // console.log('ball mass',this.ball.body.mass)
+
         //Static Body
         var board = this.add.graphics(1130, 100);
         board.beginFill(0xffffff);
@@ -58,8 +62,8 @@ class Game extends Phaser.State {
 
         var netgroup = this.add.group();
         // net
-        // this.createNet(40, 400, 64);
-
+        this.createNet(5, 1020, 149);
+        this.createNet(5, 1070, 149);
         this.input.onDown.add(this.launch, this);
 
         const text = this.add.text(this.game.width * 0.5, 0, 'click to the left / right of the ball', {
@@ -71,7 +75,7 @@ class Game extends Phaser.State {
 
         this.bmd = this.add.bitmapData(1334, 670);
         this.bmd.context.fillStyle = '#ffffff';
-    
+
         this.bg = this.add.sprite(0, 0, this.bmd);
 
 
@@ -80,9 +84,9 @@ class Game extends Phaser.State {
     createNet(length, xAnchor, yAnchor) {
         var newRect;
         var lastRect;
-        var height = 20; //  Height for the physics body - your image height is 8px
-        var width = 16; //  This is the width for the physics body. If too small the rectangles will get scrambled together.
-        var maxForce = 20000; //  The force that holds the rectangles together.
+        var height = 10; //  Height for the physics body - your image height is 8px
+        var width = 8; //  This is the width for the physics body. If too small the rectangles will get scrambled together.
+        var maxForce = 100; //  The force that holds the rectangles together.
 
         for (var i = 0; i <= length; i++) {
             var x = xAnchor; //  All rects are on the same x position
@@ -96,27 +100,35 @@ class Game extends Phaser.State {
                 lastRect.bringToTop();
             }
 
-            //  Enable physicsbody
-            this.physics.p2.enable(newRect, false);
 
+            //  Enable physicsbody
+            // if(i===0){
+            // this.physics.p2.enable(newRect, true);
+            // }else{
+            this.physics.p2.enable(newRect, true);
+            // }
+
+            newRect.body.damping=0.5;
             //  Set custom rectangle
             newRect.body.setRectangle(width, height);
-
+           
             if (i === 0) {
                 newRect.body.static = true;
+                 newRect.body.clearCollision(true, true);
+                // newRect.enableBody = false;
             } else {
                 //  Anchor the first one created
-                newRect.body.velocity.x = 400; //  Give it a push :) just for fun
+                // newRect.body.velocity.x = 400; //  Give it a push :) just for fun
                 newRect.body.mass = length / i; //  Reduce mass for evey rope element
+                console.log('net mass',length / i)
             }
 
             //  After the first rectangle is created we can add the constraint
             if (lastRect) {
-                this.physics.p2.createRevoluteConstraint(newRect, [0, -10], lastRect, [0, 10], maxForce);
+                this.physics.p2.createRevoluteConstraint(newRect, [0, -5], lastRect, [0, 5], maxForce);
             }
 
             lastRect = newRect;
-
         }
     }
 
