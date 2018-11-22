@@ -9,7 +9,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        vendor: ['howler'],
+        vendor: [],
         main: path.resolve(__dirname, "src/assets/js/main.js")
     },
     output: {
