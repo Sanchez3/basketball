@@ -3,7 +3,15 @@
 仿[决胜三分球demo](http://jdc.jd.com/demo/ball-demo/)
 使用 [phaser](http://phaser.io/) 替代 [LayaAir](https://www.layabox.com/) + [matter.js](http://brm.io/matter-js/)
 
-# phaser
+# phaser  物理引擎
+> Arcade，P2，Ninja物理引擎区别
+>
+> **Arcade：**轻量级高性能AABB式物理碰撞系统，AABB即Axis-aligned Bounded Rectangles，译为轴对称盒子，只能以矩形框计算碰撞区域，精度低，运算速度快，可以实现简单的碰撞、重力等效果。
+>
+> **P2：**可以实现多种物理模型和物理特性，如Arcade所不能实现的多边形碰撞区域、弹簧、摩擦力、碰撞材质、反弹系数等，功能强大但也必然会使运算复杂、耗费性能。
+>
+> **Ninja：**可以实现平面、凹凸面、球面等的碰撞，物体在非平整面上碰撞时不会翻倒，跟忍者一样。
+
 利用 P2 PHYSICS 完成物理碰撞
 
 body常用属性
@@ -41,4 +49,3 @@ body常用属性
 - [Spring Basketball Arrow Target](https://www.askforgametask.com/game/spring-basketball-arrow-target/)
 - [H5游戏开发：决胜三分球](https://aotu.io/notes/2017/11/16/basketball/index.html)
 - [Phaser物理引擎篇](https://ryangun.github.io/2018/03/05/Phaser%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E%E7%AF%87/)
-
