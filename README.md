@@ -6,6 +6,22 @@
 # phaser
 利用 P2 PHYSICS 完成物理碰撞
 
+body常用属性
+
+| 属性               | 类型    | 默认值     | 说明                           |
+| ------------------ | ------- | ---------- | ------------------------------ |
+| acceleration       | object  | {x=0, y=0} | 加速度                         |
+| allowGravity       | boolean | true       | 是否启用重力效果               |
+| bounce             | object  | {x=0, y=0} | 设置反弹系数                   |
+| collideWorldBounds | boolean | false      | 是否监测与游戏世界边沿的碰撞   |
+| friction           | object  | {x=1, y=0} | 设置摩擦系数                   |
+| gravity            | object  | {x=0, y=0} | 设置物体重力，会和世界重力叠加 |
+| immovable          | boolean | false      | 设置是否固定不动               |
+| mass               | number  | 1          | 设置重量                       |
+| velocity           | object  | {x=0, y=0} | 设置速度                       |
+
+
+
 ## Issues
 当渲染模式非CANVAS时，使用BitmapData，update方法中 bitmapdata无法render（除非设置`dirty - If dirty this BitmapData will be re-rendered.`）
 
@@ -24,3 +40,5 @@
 ## Refenerce
 - [Spring Basketball Arrow Target](https://www.askforgametask.com/game/spring-basketball-arrow-target/)
 - [H5游戏开发：决胜三分球](https://aotu.io/notes/2017/11/16/basketball/index.html)
+- [Phaser物理引擎篇](https://ryangun.github.io/2018/03/05/Phaser%E7%89%A9%E7%90%86%E5%BC%95%E6%93%8E%E7%AF%87/)
+
