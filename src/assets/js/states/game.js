@@ -63,7 +63,7 @@ class Game extends Phaser.State {
         var netgroup = this.add.group();
         // net
         this.createNet(5, 1020, 149);
-        this.createNet(5, 1070, 149);
+        this.createNet(5, 1100, 149);
         this.input.onDown.add(this.launch, this);
 
         const text = this.add.text(this.game.width * 0.5, 0, 'click to the left / right of the ball', {
