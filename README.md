@@ -12,8 +12,6 @@
 >
 > **Ninja：**可以实现平面、凹凸面、球面等的碰撞，物体在非平整面上碰撞时不会翻倒，跟忍者一样。
 
-body常用属性
-
 | 属性               | 类型    | 默认值     | 说明                           |
 | ------------------ | ------- | ---------- | ------------------------------ |
 | acceleration       | object  | {x=0, y=0} | 加速度                         |
@@ -27,6 +25,18 @@ body常用属性
 | velocity           | object  | {x=0, y=0} | 设置速度                       |
 
 利用 P2 PHYSICS 完成物理碰撞
+
+P2物理引擎，body常用属性：
+
+- angle ：角度。
+- angularVelocity ：角速度。
+- position ：坐标。
+- damping ：速度阻尼。刚体在线性速度方向上受到的阻力。
+- force ：作用力。刚体在线性速度方向上收到的扭力。
+- velocity ：速度。
+- type ：刚体类型。Dynamic、Kinematic或Static
+- mass ：刚体质量。
+
 [p2.js](https://github.com/schteppe/p2.js)
 
 ## keys
