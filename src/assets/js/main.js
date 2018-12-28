@@ -21,11 +21,41 @@ import Boot from './states/boot';
 import Preloader from './states/preloader';
 import Game from './states/game';
 
-const game = new Phaser.Game({ width: 1334, height: 750, renderer: Phaser.CANVAS, preserveDrawingBuffer: true, parent: 'canvas-wrapper' });
-game.state.add('Boot', Boot);
-game.state.add('Preloader', Preloader);
-game.state.add('Game', Game);
-game.state.start('Boot');
+// const game = new Phaser.Game({ width: 1334, height: 750, renderer: Phaser.CANVAS, preserveDrawingBuffer: true, parent: 'canvas-wrapper' });
+// game.state.add('Boot', Boot);
+// game.state.add('Preloader', Preloader);
+// game.state.add('Game', Game);
+// game.state.start('Boot');
+
+// var w = document.getElementById('mcanvas').clientWidth;
+// var h = document.getElementById('mcanvas').clientHeight;
+var _config = {
+    width: 1334,
+    height: 750,
+    type: Phaser.AUTO,
+    canvas: document.getElementById('mcanvas'),
+    resolution: window.devicePixelRatio,
+    transparent: false,
+    preserveDrawingBuffer: true,
+    backgroundColor: '#124184',
+    physics: {
+        default: 'matter',
+        matter: {
+            gravity: {
+                x: 0,
+                y: 0
+            },
+            debug: true,
+            debugShowInternalEdges: true,
+            // debugBodyColor: 0xffffff
+        }
+    }
+}
+var game = new Phaser.Game(_config);
+game.scene.add('Boot', require('../states/boot'));
+game.scene.add('Preloader', require('../states/preloader'));
+game.scene.add('Game', require('../states/game'));
+game.scene.start('Boot');
 
 window.h5 = {
     rootResize2: function() {
