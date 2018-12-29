@@ -1,7 +1,6 @@
-class Preloader extends Phaser.State {
+class Preloader{
 
     constructor() {
-        super();
         this.asset = null;
         this.ready = false;
     }
@@ -12,13 +11,13 @@ class Preloader extends Phaser.State {
         this.load.setPreloadSprite(this.asset);
 
         // setup loading and its events
-        this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+        this.load.on('complete', that.onLoadComplete.bind(this));
         this.loadResources();
     }
 
     update() {
         if (this.ready) {
-            this.game.state.start('Game');
+            this.game.scene.start('Game');
         }
     }
 

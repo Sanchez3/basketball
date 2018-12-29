@@ -10,9 +10,7 @@
 
 // import CSS
 // import animate_css from 'animate.css/animate.min.css';
-window.PIXI = require('phaser-ce/build/custom/pixi');
-window.p2 = require('phaser-ce/build/custom/p2');
-window.Phaser = require('phaser-ce/build/custom/phaser-split');
+require('phaser');
 
 
 // import Js Plugins/Entities
@@ -52,9 +50,9 @@ var _config = {
     }
 }
 var game = new Phaser.Game(_config);
-game.scene.add('Boot', require('../states/boot'));
-game.scene.add('Preloader', require('../states/preloader'));
-game.scene.add('Game', require('../states/game'));
+game.scene.add('Boot', require('./scene/boot'));
+game.scene.add('Preloader', require('./scene/preloader'));
+game.scene.add('Game', require('./scene/game'));
 game.scene.start('Boot');
 
 window.h5 = {

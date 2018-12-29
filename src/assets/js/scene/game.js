@@ -1,7 +1,7 @@
-class Game extends Phaser.State {
+class Game{
 
     constructor() {
-        super();
+       
     }
 
     create() {
