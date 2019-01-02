@@ -1,4 +1,4 @@
-class Preloader{
+class Preloader {
 
     constructor() {
         this.asset = null;
@@ -7,18 +7,18 @@ class Preloader{
 
     preload() {
         // setup loading bar
-        this.asset = this.add.sprite(this.game.width * 0.5 - 110, this.game.height * 0.5 - 10, 'preloader');
-        this.load.setPreloadSprite(this.asset);
+        this.anims.create({ key: 'loading', frames: this.anims.generateFrameNames('preloader-sprite'), repeat: -1 });
+        this.asset = this.add.sprite(this.game.config.width * 0.5, this.game.config.height * 0.5, 'preloader-sprite').play('loading');
+        this.asset.x = this.game.config.width * 0.5 - this.asset.width / 2;
+        this.asset.displayWidth = 0;
+
+        this.asset.setOrigin(0, 0.5);
+        this.pg = { v: 0 };
 
         // setup loading and its events
-        this.load.on('complete', that.onLoadComplete.bind(this));
+        this.load.on('progress', this.onLoadProgress.bind(this))
+        this.load.on('complete', this.onLoadComplete.bind(this));
         this.loadResources();
-    }
-
-    update() {
-        if (this.ready) {
-            this.game.scene.start('Game');
-        }
     }
 
     loadResources() {
@@ -27,11 +27,24 @@ class Preloader{
         this.load.image('basketball_stand', 'assets/img/basketball_stand.png');
         this.load.image('ball', 'assets/img/ball.png');
         this.load.image('bg', 'assets/img/bg.jpg');
-        this.load.spritesheet('chain', 'assets/img/chain.png', 8, 13);
+        this.load.spritesheet('chain', 'assets/img/chain.png', { frameWidth: 8, frameHeight: 13 });
     }
-
+    onLoadProgress(value) {
+        // TweenMax.to(this.pg, 0.2, {
+        //     v: value,
+        //     onUpdate: function() {
+        //         this.asset.displayWidth = this.asset.width * this.pg.v
+        //     }.bind(this)
+        // })
+        this.tweens.add({
+            targets: this.asset,
+            displayWidth: this.asset.width*value,
+            ease: 'Power1',
+            duration: 100
+        });
+    }
     onLoadComplete() {
-        this.ready = true;
+        console.log('all')
     }
 }
 

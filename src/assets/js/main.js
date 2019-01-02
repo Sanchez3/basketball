@@ -10,14 +10,13 @@
 
 // import CSS
 // import animate_css from 'animate.css/animate.min.css';
-require('phaser');
-
+import 'phaser'
 
 // import Js Plugins/Entities
-
-import Boot from './states/boot';
-import Preloader from './states/preloader';
-import Game from './states/game';
+import Boot from './scene/boot'
+import Preloader from './scene/preloader'
+import Game from './scene/game'
+import TweenMax from 'gsap'
 
 // const game = new Phaser.Game({ width: 1334, height: 750, renderer: Phaser.CANVAS, preserveDrawingBuffer: true, parent: 'canvas-wrapper' });
 // game.state.add('Boot', Boot);
@@ -31,11 +30,12 @@ var _config = {
     width: 1334,
     height: 750,
     type: Phaser.AUTO,
-    canvas: document.getElementById('mcanvas'),
+    parent: document.getElementById('canvas-wrapper'),
     resolution: window.devicePixelRatio,
     transparent: false,
     preserveDrawingBuffer: true,
     backgroundColor: '#124184',
+    mode: 0,
     physics: {
         default: 'matter',
         matter: {
@@ -50,9 +50,9 @@ var _config = {
     }
 }
 var game = new Phaser.Game(_config);
-game.scene.add('Boot', require('./scene/boot'));
-game.scene.add('Preloader', require('./scene/preloader'));
-game.scene.add('Game', require('./scene/game'));
+game.scene.add('Boot', Boot);
+game.scene.add('Preloader', Preloader);
+game.scene.add('Game', Game);
 game.scene.start('Boot');
 
 window.h5 = {

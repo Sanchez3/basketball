@@ -1,33 +1,16 @@
-
-class Boot {
+class Boot extends Phaser.Scene {
 
     constructor() {
-     
+        super();
     }
 
     preload() {
-        this.load.image('preloader', 'assets/img/preloader.gif');
+       this.load.atlas('preloader-sprite', 'assets/img/preloader-sprite.png', 'assets/img/preloader-sprite.json');
     }
 
     create() {
-        this.game.input.maxPointers = 1;
-
-        //setup device scaling
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.scale.pageAlignHorizontally = true;
-        this.game.scale.pageAlignVertically = true;
-
-        this.initGlobalVariables();
-
         this.game.scene.start('Preloader');
     }
-
-    initGlobalVariables() {
-        this.game.global = {
-
-        };
-    }
-
 }
 
 export default Boot;
