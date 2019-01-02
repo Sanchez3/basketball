@@ -27,6 +27,7 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
+*/.DS_Store
 
 # Thumbnails
 ._*
@@ -59,4 +60,5 @@ yarn-error.log
 dist
 yarn.lock
 package-lock.json
+
 
