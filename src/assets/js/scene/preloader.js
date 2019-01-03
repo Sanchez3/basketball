@@ -45,6 +45,7 @@ class Preloader {
     }
     onLoadComplete() {
         console.log('all')
+        this.game.scene.start('Game');
     }
 }
 

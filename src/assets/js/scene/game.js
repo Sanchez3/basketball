@@ -1,82 +1,62 @@
-class Game{
+class Game {
 
     constructor() {
-       
+
     }
 
     create() {
-        this.world.setBounds(0, 0, 1334, 670);
-        this.physics.startSystem(Phaser.Physics.P2JS);
-        this.physics.p2.defaultRestitution = 0.8;
-
-
-        this.add.image(this.game.width * 0.5, this.game.height * 0.5, 'bg').anchor.set(0.5);
-        var stand = this.add.sprite(this.game.width * 0.5 + 325, 10, 'basketball_stand');
-
+        this.matter.world.setBounds(0, 0, 1334, 670);
+        this.add.image(this.game.config.width * 0.5, this.game.config.height * 0.5, 'bg');
+        var stand = this.add.sprite(this.game.config.width * 0.5 + 425, this.game.config.height * 0.5 - 150, 'basketball_stand');
         var basket = this.add.graphics(1010, 146);
-        basket.beginFill(0x9A2D33);
+        basket.fillStyle(0x9A2D33);
         basket.moveTo(4, 0);
         basket.lineTo(92, 0);
-        basket.arcTo(92, 0, 96, 4, 6);
-        basket.arcTo(96, 4, 92, 8, 6);
+        basket.arc(92, 0, 96, 4, 6);
+        basket.arc(96, 4, 92, 8, 6);
         basket.lineTo(92, 8);
         basket.lineTo(4, 8);
-        basket.arcTo(0, 4, 4, 8, 6);
-        basket.arcTo(4, 0, 0, 4, 6);
-        basket.endFill();
+        basket.arc(0, 4, 4, 8, 6);
+        basket.arc(4, 0, 0, 4, 6);
+        basket.closePath();
 
 
-        this.ball = this.add.sprite(400, 100, 'ball');
+
+        this.ball = this.matter.add.sprite(400, 100, 'ball');
+        this.ball.setBody({
+            type: 'circle',
+            radius: 28
+        });
         this.ball.smoothed = false;
-        this.ball.anchor.setTo(0.5);
-        this.physics.p2.enable(this.ball, true);
-        this.ball.body.clearShapes();
-        this.ball.body.setCircle(28);
-        // this.ball.body.fixedRotation = false;
-        this.ball.body.velocity.y = 200;
 
-        this.physics.p2.gravity.y = 100;
-        this.physics.p2.restitution = 0.8;
-        this.camera.follow(this.ball);
-        this.ball.body.mass=10;
+        // this.ball.body.fixedRotation = false;
+        this.ball.setVelocity(-2, -2)
+        this.ball.setBounce(0.8);
+        this.ball.setMass(10);
         // console.log('ball mass',this.ball.body.mass)
 
         //Static Body
-        var board = this.add.graphics(1130, 100);
-        board.beginFill(0xffffff);
-        board.drawRect(0, 0, 50, 136);
-        board.endFill();
-        board.alpha = 0;
-        this.physics.p2.enable(board, true);
-        board.body.static = true;
+        var board = this.matter.add.rectangle(1130, 100, 50, 136, { isStatic: true });
 
-        var bbasket = this.add.graphics(1020, 149);
-        bbasket.beginFill(0xffffff);
-        bbasket.drawRect(0, 0, 5, 6);
-        bbasket.endFill();
-        bbasket.alpha = 0;
-        this.physics.p2.enable(bbasket, true);
-
-        bbasket.body.static = true;
-
+        var bbasket = this.matter.add.rectangle(1020, 149, 5, 6, { isStatic: true });
 
         var netgroup = this.add.group();
         // net
-        this.createNet(5, 1020, 149);
-        this.createNet(5, 1100, 149);
-        this.input.onDown.add(this.launch, this);
+        // this.createNet(5, 1020, 149);
+        // this.createNet(5, 1100, 149);
+        this.input.on('pointerdown', this.launch.bind(this));
 
         const text = this.add.text(this.game.width * 0.5, 0, 'click to the left / right of the ball', {
             font: '42px Arial',
             fill: '#ffffff',
             align: 'center'
         });
-        text.anchor.set(0.5, 0);
+        text.setOrigin(0.5, 0);
 
-        this.bmd = this.add.bitmapData(1334, 670);
-        this.bmd.context.fillStyle = '#ffffff';
+        // this.bmd = this.add.bitmapData(1334, 670);
+        // this.bmd.context.fillStyle = '#ffffff';
 
-        this.bg = this.add.sprite(0, 0, this.bmd);
+        // this.bg = this.add.sprite(0, 0, this.bmd);
 
 
         // this.input.onDown.add(this.endGame, this);
@@ -108,19 +88,19 @@ class Game{
             this.physics.p2.enable(newRect, true);
             // }
 
-            newRect.body.damping=0.5;
+            newRect.body.damping = 0.5;
             //  Set custom rectangle
             newRect.body.setRectangle(width, height);
-           
+
             if (i === 0) {
                 newRect.body.static = true;
-                 newRect.body.clearCollision(true, true);
+                newRect.body.clearCollision(true, true);
                 // newRect.enableBody = false;
             } else {
                 //  Anchor the first one created
                 // newRect.body.velocity.x = 400; //  Give it a push :) just for fun
                 newRect.body.mass = length / i; //  Reduce mass for evey rope element
-                console.log('net mass',length / i)
+                console.log('net mass', length / i)
             }
 
             //  After the first rectangle is created we can add the constraint
@@ -133,20 +113,19 @@ class Game{
     }
 
     update() {
-        this.bmd.context.fillStyle = '#ffff00';
-        this.bmd.context.fillRect(this.ball.x, this.ball.y, 2, 2);
+        // this.bmd.context.fillStyle = '#ffff00';
+        // this.bmd.context.fillRect(this.ball.x, this.ball.y, 2, 2);
         //When renderer:WEBGL
         // this.bmd.dirty = true;
 
     }
 
-    launch() {
-        if (this.input.x < this.ball.x) {
-            this.ball.body.velocity.x = -200;
-            this.ball.body.velocity.y = -200;
+    launch(pointer) {
+        if (pointer.x < this.ball.x) {
+            this.ball.setVelocity(-10, -10)
+
         } else {
-            this.ball.body.velocity.x = 200;
-            this.ball.body.velocity.y = -200;
+            this.ball.setVelocity(10, -10)
         }
     }
 
