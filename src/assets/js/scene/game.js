@@ -30,8 +30,8 @@ class Game {
         this.ball.smoothed = false;
 
         // this.ball.body.fixedRotation = false;
-        this.ball.setVelocity(-2, -2)
-        this.ball.setBounce(0.8);
+        this.ball.setVelocity(2, -2)
+        this.ball.setBounce(0.5);
         this.ball.setMass(10);
         // console.log('ball mass',this.ball.body.mass)
 
@@ -112,13 +112,6 @@ class Game {
         }
     }
 
-    update() {
-        // this.bmd.context.fillStyle = '#ffff00';
-        // this.bmd.context.fillRect(this.ball.x, this.ball.y, 2, 2);
-        //When renderer:WEBGL
-        // this.bmd.dirty = true;
-
-    }
 
     launch(pointer) {
         if (pointer.x < this.ball.x) {
