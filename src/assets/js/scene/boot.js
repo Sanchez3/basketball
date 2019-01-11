@@ -5,10 +5,11 @@ class Boot extends Phaser.Scene {
     }
 
     preload() {
-       this.load.atlas('preloader-sprite', 'assets/img/preloader-sprite.png', 'assets/img/preloader-sprite.json');
+        this.load.atlas('preloader-sprite', 'assets/img/preloader-sprite.png', 'assets/img/preloader-sprite.json');
     }
 
     create() {
+        // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scene.start('Preloader');
     }
 }
