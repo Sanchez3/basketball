@@ -24,10 +24,10 @@ class Preloader {
     loadResources() {
         // load your resources here
 
-        this.load.image('basketball_stand', 'assets/img/basketball_stand.png');
+        this.load.image('basketball-stand', 'assets/img/basketball-stand.png');
         this.load.image('ball', 'assets/img/ball.png');
         this.load.image('bg', 'assets/img/bg.jpg');
-        this.load.spritesheet('chain', 'assets/img/chain.png', { frameWidth: 8, frameHeight: 13 });
+        this.load.spritesheet('chain-sprites', 'assets/img/chain-sprites.png', { frameWidth: 15, frameHeight: 13 });
     }
     onLoadProgress(value) {
         // TweenMax.to(this.pg, 0.2, {
