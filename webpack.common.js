@@ -9,7 +9,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        vendor: [],
+        vendor: ['howler'],
         main: path.resolve(__dirname, "src/assets/js/main.js")
     },
     output: {
@@ -80,9 +80,6 @@ module.exports = {
             from: path.resolve(__dirname, "src/assets/img"),
             to: path.resolve(__dirname, "dist/assets/img")
 
-        }, {
-            from: path.resolve(__dirname, "src/assets/media"),
-            to: path.resolve(__dirname, "dist/assets/media")
         }]),
         extractCSS,
         extractSASS,
