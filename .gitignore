@@ -58,6 +58,5 @@ yarn-error.log
 
 # project
 .publish
-dist
 yarn.lock
 package-lock.json
