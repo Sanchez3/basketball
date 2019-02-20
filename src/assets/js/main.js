@@ -10,7 +10,7 @@
 
 // import CSS
 // import animate_css from 'animate.css/animate.min.css';
-import 'phaser'
+import Phaser from 'phaser'
 
 // import Js Plugins/Entities
 import Boot from './scene/boot'

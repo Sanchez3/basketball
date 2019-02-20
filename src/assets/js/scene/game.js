@@ -18,7 +18,7 @@ class Game {
         this.blitter = this.add.blitter(0, 0, 'chain-sprites');
         this.hsv = Phaser.Display.Color.HSVColorWheel();
         this.i = 0;
-        this.text1 = this.add.text(50, 50, 'click to the left / right of the ball\nOr\ncatch the ball', { font: "74px Arial Black", fill: "#fff", align: 'center' });
+        this.text1 = this.add.text(50, 50, 'click to the left / right of the ball\nOr\ncatch the ball', { font: "30px Arial Black", fill: "#fff", align: 'center' });
         this.text1.setStroke('#00f', 16);
         // this.text1.setShadow(2, 2, "#333333", 2, true, true);
 
