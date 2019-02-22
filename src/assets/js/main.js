@@ -10,13 +10,14 @@
 
 // import CSS
 // import animate_css from 'animate.css/animate.min.css';
-import Phaser from 'phaser'
+import Phaser from 'phaser/dist/phaser.min.js'
+import TweenMax from 'gsap'
 
 // import Js Plugins/Entities
 import Boot from './scene/boot'
 import Preloader from './scene/preloader'
 import Game from './scene/game'
-import TweenMax from 'gsap'
+
 
 // const game = new Phaser.Game({ width: 1334, height: 750, renderer: Phaser.CANVAS, preserveDrawingBuffer: true, parent: 'canvas-wrapper' });
 // game.state.add('Boot', Boot);
