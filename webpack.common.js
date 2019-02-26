@@ -94,6 +94,5 @@ module.exports = {
                 collapseWhitespace: true
             }
         })
-
     ]
 };
